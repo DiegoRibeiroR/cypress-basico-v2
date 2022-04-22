@@ -71,10 +71,16 @@ describe('Centarl de atendiemnto ao Cliente TAT', function(){
           .clear()
           .should('have.value', '')
     })
-    it('exibe mensagem de erro ao submeter formulário sem preencher os campos', function(){
+    it.only('exibe mensagem de erro ao submeter formulário sem preencher os campos', function(){
+        cy.clock()
+
         cy.contains('button','Enviar').click()
 
         cy.get('.error').should('be.visible')
+
+        cy.tick(3000)
+
+        cy.get('.error').should('not.be.visible')
     })
     it('envia formulário com sucesso usando comando customizado', function(){
         cy.fillMandatoryFieldsAndSubmit()
