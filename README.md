@@ -14,11 +14,13 @@
 
  ## Testes
 
+ Para abrir o cypress run, digite no terminal: `npx cypress open`
+
  Os testes podem simular a visualização desktop e mobile
  
  > Para desktop:
  Execute `npm test` (ou `npm t` para a versão curta) para executar o teste no modo headless.
- Ou execute `npm run cy:open` ou `npx cypress open` para abrir o Cypress no modo interativo.
+ Ou execute `npm run cy:open` para executar o Cypress no modo interativo.
 
  > Para mobile:
  Execute `npm run test:mobile` para executar o teste no modo headless.
