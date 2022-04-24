@@ -71,7 +71,7 @@ describe('Centarl de atendiemnto ao Cliente TAT', function(){
           .clear()
           .should('have.value', '')
     })
-    it.only('exibe mensagem de erro ao submeter formulário sem preencher os campos', function(){
+    it('exibe mensagem de erro ao submeter formulário sem preencher os campos', function(){
         cy.clock()
 
         cy.contains('button','Enviar').click()
@@ -141,11 +141,11 @@ describe('Centarl de atendiemnto ao Cliente TAT', function(){
     })
   })
     it('seleciona um arquivo utilizadno uma fixture para a qual foi dada um alias', function(){
-        cy.fixture('example.json').as('sampleFile')
-        cy.get('#file-upload')
-          .selectFile('@sampleFile')
-          .should(function($input){
-            expect($input[0].files[0].name).to.equal('example.json')
+      cy.fixture('example.json').as('sampleFile')
+      cy.get('#file-upload')
+        .selectFile('@sampleFile')
+        .should(function($input){
+        expect($input[0].files[0].name).to.equal('example.json')
           })
       
     })
@@ -159,5 +159,38 @@ describe('Centarl de atendiemnto ao Cliente TAT', function(){
         .click()
       
       cy.contains('Talking About Testing').should('be.visible')
+    
+    })
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+      cy.get('.success')
+        .should('not.be.visible')
+        .invoke('show')
+        .should('be.visible')
+        .and('contain', 'Mensagem enviada com sucesso.')
+        .invoke('hide')
+        .should('not.be.visible')
+      cy.get('.error')
+        .should('not.be.visible')
+        .invoke('show')
+        .should('be.visible')
+        .and('contain', 'Valide os campos obrigatórios!')
+        .invoke('hide')
+        .should('not.be.visible')
+    })
+    it('preenche a área de texto usando o comando invoke', function(){
+      const longText = Cypress._.repeat('0123456789', 20)
+
+      cy.get('#open-text-area')
+        .invoke('val', longText)
+        .should('have.value', longText)
+    })
+    it('fazer uma requisição HTTP', function(){
+      cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+      .should(function(response){
+        const { status, statusText, body } = response
+        expect(status).to.equal(200)
+        expect(statusText).to.equal('OK')
+        expect(body).to.include('CAC TAT')
+      })
     })
 })
