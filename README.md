@@ -9,7 +9,7 @@
  > Usei as versões `v16.13.2` do Node.js e `8.1.2` do npm. Sugiro que você use as mesmas versões ou versões posteriores.
 
  ## Instalação
-
+Baixar o node.js  `https://nodejs.org/download/release/v14.18.1/`
  Execute `npm` install (ou npm i para a versão curta) para instalar as dependências dev.
 
  ## Testes
